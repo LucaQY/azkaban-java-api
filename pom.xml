@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.azkaban</groupId>
-    <artifactId>api</artifactId>
+    <groupId>com.rouchi</groupId>
+    <artifactId>azkaban-plus</artifactId>
     <version>1.0</version>
 
     <parent>
@@ -14,6 +14,41 @@
         <version>2.0.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <properties>
+        <springfox.version>2.9.2</springfox.version>
+        <java.version>1.8</java.version>
+        <dubbo.version>2.5.5</dubbo.version>
+        <zkclient.version>0.10</zkclient.version>
+        <lombok.version>1.16.18</lombok.version>
+        <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+        <elasticsearch.version>6.8.1</elasticsearch.version>
+        <hutool.version>5.3.9</hutool.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <mybatis.version>1.3.2</mybatis.version>
+        <mysql.version>5.1.35</mysql.version>
+        <springfox.version>2.9.2</springfox.version>
+        <mybatis.ehcache.version>1.1.0</mybatis.ehcache.version>
+        <redis.version>2.9.0</redis.version>
+        <fastjson.version>1.2.8</fastjson.version>
+        <druid.version>1.1.10</druid.version>
+        <pagehelper.version>1.2.5</pagehelper.version>
+        <commons.lang3.version>3.7</commons.lang3.version>
+        <commons.io.version>2.6</commons.io.version>
+        <google.collections.version>1.0</google.collections.version>
+        <aspectj.version>1.9.1</aspectj.version>
+        <jodd.version>5.0.3</jodd.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <flink.version>1.7.2</flink.version>
+        <kafka.client.version>0.11.0.1</kafka.client.version>
+        <spring.hadoop.version>2.5.0.RELEASE</spring.hadoop.version>
+        <lombok.version>1.16.8</lombok.version>
+        <httpclient.version>4.5.7</httpclient.version>
+        <!--  <spring.version>4.2.0.RELEASE</spring.version> -->
+    </properties>
+
 
     <dependencies>
         <!-- spring boot -->
@@ -26,6 +61,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
         <!-- http client -->
         <dependency>
@@ -51,7 +95,16 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.47</version>
         </dependency>
-
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${springfox.version}</version>
+        </dependency>
     </dependencies>
 
 

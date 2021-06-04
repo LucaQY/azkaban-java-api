@@ -44,7 +44,7 @@ what?怎么还有个status？意义何在，响应成功，我就给你返回一
 BaseResponse内容如下，其中为了映射Azkaban的响应，既包含了"status"又包含了"error"，最后通过correction会更正信息到"status"，所以我们可以统一对"status"进行判断是否执行成功。内容如下：
 
 ```java
-package com.azkaban.response;
+package com.rouchi.response;
 
 import java.util.Objects;
 
@@ -116,7 +116,7 @@ public class BaseResponse {
 为了统一响应，这里使用响应处理器，对Azkaban响应进行统一处理，内容如下：
 
 ```java
-package com.azkaban.response;
+package com.rouchi.response;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
@@ -139,7 +139,7 @@ public class ResponseHandler {
         T response = null;
         try {
             Response res = request.execute();
-            HttpEntity entity  = res.returnResponse().getEntity();
+            HttpEntity entity = res.returnResponse().getEntity();
             response = handle(entity, tClass);
         } catch (Exception e) {
             try {
@@ -211,9 +211,9 @@ public class ResponseHandler {
 在com.azkaban.api包下创建AzkabanApi接口类，提供Azkaban相对应API的接口，内容如下所示：
 
 ```java
-package com.azkaban.api;
+package com.rouchi.api;
 
-import com.azkaban.response.*;
+import com.rouchi.response.*;
 
 
 /**
@@ -346,9 +346,9 @@ public interface AzkabanApi {
 接口有了，接下来就是实现接口，创建AzkabanApiImpl实现类，其中请求主要使用了http-client的fluent，内容如下：
 
 ```java
-package com.azkaban.api;
+package com.rouchi.api;
 
-import com.azkaban.response.*;
+import com.rouchi.response.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.fluent.Form;
@@ -529,11 +529,11 @@ public class AzkabanApiImpl implements AzkabanApi {
 ApiInvocationHander继承java.lang.reflect.InvocationHandler，重写invoke()方法，是动态代理的调用处理器。其中主要实现了三个功能，一个是代理AzkabanApiImpl提供的方法，二是判断执行结果是否异常，如果异常进行登录，三是进行统一的异常处理。代码如下：
 
 ```java
-package com.azkaban.proxy;
+package com.rouchi.proxy;
 
 
-import com.azkaban.api.AzkabanApiImpl;
-import com.azkaban.response.BaseResponse;
+import com.rouchi.api.AzkabanApiImpl;
+import com.rouchi.response.BaseResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -650,11 +650,11 @@ public class ApiInvocationHandler implements InvocationHandler {
 AzkabanApiProxyBuilder是动态代理的构建器，通过构建器能够构建出代理的AzkabanApi实例。构建器需要传入azkaban的服务地址、用户名、密码。代码如下：
 
 ```java
-package com.azkaban.proxy;
+package com.rouchi.proxy;
 
 
-import com.azkaban.api.AzkabanApi;
-import com.azkaban.api.AzkabanApiImpl;
+import com.rouchi.api.AzkabanApi;
+import com.rouchi.api.AzkabanApiImpl;
 
 import java.lang.reflect.Proxy;
 
@@ -725,11 +725,11 @@ public class AzkabanApiProxyBuilder {
 通过AzkabanApiConfig类，创建Bean注册到Spring里，代码如下所示：
 
 ```java
-package com.azkaban.config;
+package com.rouchi.config;
 
 
-import com.azkaban.api.AzkabanApi;
-import com.azkaban.proxy.AzkabanApiProxyBuilder;
+import com.rouchi.api.AzkabanApi;
+import com.rouchi.proxy.AzkabanApiProxyBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
